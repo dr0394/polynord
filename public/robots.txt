@@ -1,0 +1,16 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://sonnenschutzfolien-montage.de/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 0
+
+# Block bots that are known to be problematic
+User-agent: AhrefsBot
+Crawl-delay: 2
+
+User-agent: SemrushBot
+Crawl-delay: 2
