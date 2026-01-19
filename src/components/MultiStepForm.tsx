@@ -11,6 +11,7 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
   const [formData, setFormData] = useState({
     anfrageart: '',
     objekttyp: '',
+    firma: '',
     name: '',
     email: '',
     telefon: '',
@@ -30,10 +31,10 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const whatsappMessage = `Neue Anfrage über sonnenschutzfolien-montage.de\n\nArt: ${formData.anfrageart}\nObjekt: ${formData.objekttyp}\nName: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.telefon}\n\nNachricht: ${formData.nachricht}`;
+    const whatsappMessage = `Neue B2B-Anfrage über sonnenschutzfolien-montage.de\n\nArt: ${formData.anfrageart}\nObjekt: ${formData.objekttyp}\nFirma: ${formData.firma}\nName: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.telefon}\n\nNachricht: ${formData.nachricht}`;
 
-    const emailSubject = 'Neue Anfrage: Sonnenschutzfolien';
-    const emailBody = `Neue Anfrage über sonnenschutzfolien-montage.de\n\nArt der Anfrage: ${formData.anfrageart}\nObjekttyp: ${formData.objekttyp}\n\nKontaktdaten:\nName: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.telefon}\n\nNachricht:\n${formData.nachricht}`;
+    const emailSubject = 'Neue B2B-Anfrage: Sonnenschutzfolien Gewerbe/Industrie';
+    const emailBody = `Neue B2B-Anfrage über sonnenschutzfolien-montage.de\n\nArt der Anfrage: ${formData.anfrageart}\nObjekttyp: ${formData.objekttyp}\n\nKontaktdaten:\nFirma: ${formData.firma}\nName: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.telefon}\n\nNachricht:\n${formData.nachricht}`;
 
     window.open(`https://wa.me/491234567890?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
     window.location.href = `mailto:info@polynord.de?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
@@ -43,6 +44,7 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
     setFormData({
       anfrageart: '',
       objekttyp: '',
+      firma: '',
       name: '',
       email: '',
       telefon: '',
@@ -70,7 +72,7 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
               <div
                 key={i}
                 className={`h-1 flex-1 rounded-full transition-colors ${
-                  i <= step ? 'bg-primary-500' : 'bg-gray-200'
+                  i <= step ? 'bg-gradient-to-r from-blue-600 to-teal-600' : 'bg-gray-200'
                 }`}
               />
             ))}
@@ -81,15 +83,15 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
           {step === 1 && (
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Art der Anfrage</h3>
-              {['Beratung', 'Angebot anfordern', 'Aufmaß vereinbaren', 'Allgemeine Frage'].map((option) => (
-                <label key={option} className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-primary-500 transition-colors">
+              {['Beratung', 'Angebot anfordern', 'Aufmaß vereinbaren', 'Projektanfrage'].map((option) => (
+                <label key={option} className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 transition-colors">
                   <input
                     type="radio"
                     name="anfrageart"
                     value={option}
                     checked={formData.anfrageart === option}
                     onChange={(e) => setFormData({ ...formData, anfrageart: e.target.value })}
-                    className="w-4 h-4 text-primary-600 accent-primary-500"
+                    className="w-4 h-4 text-blue-600 accent-blue-500"
                   />
                   <span className="ml-3 text-gray-700">{option}</span>
                 </label>
@@ -100,15 +102,15 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
           {step === 2 && (
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Wo sollen die Folien montiert werden?</h3>
-              {['Privathaus / Wohnung', 'Büro / Gewerbe', 'Wintergarten / Glasfassade', 'Lager / Industriehalle', 'Sonstiges'].map((option) => (
-                <label key={option} className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-primary-500 transition-colors">
+              {['Bürogebäude', 'Produktionshalle / Lager', 'Klinik / Pflege', 'Hotel / Gastronomie', 'Retail / Einzelhandel', 'Sonstiges'].map((option) => (
+                <label key={option} className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 transition-colors">
                   <input
                     type="radio"
                     name="objekttyp"
                     value={option}
                     checked={formData.objekttyp === option}
                     onChange={(e) => setFormData({ ...formData, objekttyp: e.target.value })}
-                    className="w-4 h-4 text-primary-600 accent-primary-500"
+                    className="w-4 h-4 text-blue-600 accent-blue-500"
                   />
                   <span className="ml-3 text-gray-700">{option}</span>
                 </label>
@@ -118,7 +120,18 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
 
           {step === 3 && (
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Deine Kontaktdaten</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Ihre Kontaktdaten</h3>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Firma / Unternehmen *</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.firma}
+                  onChange={(e) => setFormData({ ...formData, firma: e.target.value })}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Ihre Firma"
+                />
+              </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
                 <input
@@ -126,8 +139,8 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="Dein Name"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Ihr Name"
                 />
               </div>
               <div>
@@ -137,8 +150,8 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="deine@email.de"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="ihre@email.de"
                 />
               </div>
               <div>
@@ -148,7 +161,7 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
                   required
                   value={formData.telefon}
                   onChange={(e) => setFormData({ ...formData, telefon: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="+49 123 456789"
                 />
               </div>
@@ -159,19 +172,20 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Noch etwas, das wir wissen sollten?</h3>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Deine Nachricht (optional)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Ihre Nachricht (optional)</label>
                 <textarea
                   value={formData.nachricht}
                   onChange={(e) => setFormData({ ...formData, nachricht: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent h-32 resize-none"
-                  placeholder="z.B. gewünschter Termin, Anzahl der Fenster, besondere Anforderungen..."
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent h-32 resize-none"
+                  placeholder="z.B. Projektumfang, Anzahl der Fenster, gewünschter Zeitrahmen, besondere Anforderungen..."
                 />
               </div>
-              <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <p className="text-sm text-gray-700">
                   <strong>Zusammenfassung:</strong><br />
                   Art: {formData.anfrageart}<br />
                   Objekt: {formData.objekttyp}<br />
+                  Firma: {formData.firma}<br />
                   Kontakt: {formData.name}, {formData.email}
                 </p>
               </div>
@@ -197,7 +211,7 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
                   (step === 1 && !formData.anfrageart) ||
                   (step === 2 && !formData.objekttyp)
                 }
-                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg hover:opacity-90 transition-all disabled:bg-gray-300 disabled:cursor-not-allowed"
               >
                 Weiter
                 <ChevronRight className="w-5 h-5" />
@@ -205,7 +219,7 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
             ) : (
               <button
                 type="submit"
-                className="flex-1 px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors font-semibold"
+                className="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg hover:opacity-90 transition-all font-semibold"
               >
                 Anfrage absenden
               </button>

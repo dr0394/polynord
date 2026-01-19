@@ -65,26 +65,32 @@ export default function Navigation({ onOpenForm }: NavigationProps) {
           </div>
 
           <div className="hidden md:flex items-center gap-6">
-            <button onClick={() => scrollToSection('vorteile')} className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
-              Vorteile
-            </button>
-            <button onClick={() => scrollToSection('leistungen')} className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
+            <button onClick={() => scrollToSection('leistungen')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
               Leistungen
             </button>
-            <button onClick={() => scrollToSection('ablauf')} className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
-              Ablauf
+            <button onClick={() => scrollToSection('branchen')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
+              Branchen
             </button>
-            <button onClick={() => scrollToSection('referenzen')} className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
+            <button onClick={() => scrollToSection('hersteller')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
+              Partner
+            </button>
+            <button onClick={() => scrollToSection('referenzen')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
               Referenzen
             </button>
-            <button onClick={() => scrollToSection('kontakt')} className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
+            <button onClick={() => scrollToSection('ablauf')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
+              Ablauf
+            </button>
+            <button onClick={() => scrollToSection('faq')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
+              FAQ
+            </button>
+            <button onClick={() => scrollToSection('kontakt')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
               Kontakt
             </button>
             <button
               onClick={onOpenForm}
-              className="flex items-center gap-2 px-5 py-2.5 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors font-semibold"
+              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-teal-600 hover:opacity-90 text-white rounded-lg transition-all font-semibold"
             >
-              Jetzt Anfrage
+              Anfrage
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
@@ -104,40 +110,52 @@ export default function Navigation({ onOpenForm }: NavigationProps) {
           <div className="container mx-auto px-4 py-8">
             <div className="flex flex-col gap-4">
               <button
-                onClick={() => scrollToSection('vorteile')}
-                className="text-left px-6 py-4 text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors font-medium rounded-xl"
-              >
-                Vorteile
-              </button>
-              <button
                 onClick={() => scrollToSection('leistungen')}
-                className="text-left px-6 py-4 text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors font-medium rounded-xl"
+                className="text-left px-6 py-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium rounded-xl"
               >
                 Leistungen
               </button>
               <button
-                onClick={() => scrollToSection('ablauf')}
-                className="text-left px-6 py-4 text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors font-medium rounded-xl"
+                onClick={() => scrollToSection('branchen')}
+                className="text-left px-6 py-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium rounded-xl"
               >
-                Ablauf
+                Branchen
+              </button>
+              <button
+                onClick={() => scrollToSection('hersteller')}
+                className="text-left px-6 py-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium rounded-xl"
+              >
+                Partner
               </button>
               <button
                 onClick={() => scrollToSection('referenzen')}
-                className="text-left px-6 py-4 text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors font-medium rounded-xl"
+                className="text-left px-6 py-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium rounded-xl"
               >
                 Referenzen
               </button>
               <button
+                onClick={() => scrollToSection('ablauf')}
+                className="text-left px-6 py-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium rounded-xl"
+              >
+                Ablauf
+              </button>
+              <button
+                onClick={() => scrollToSection('faq')}
+                className="text-left px-6 py-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium rounded-xl"
+              >
+                FAQ
+              </button>
+              <button
                 onClick={() => scrollToSection('kontakt')}
-                className="text-left px-6 py-4 text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors font-medium rounded-xl"
+                className="text-left px-6 py-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium rounded-xl"
               >
                 Kontakt
               </button>
               <button
                 onClick={handleOpenForm}
-                className="flex items-center justify-center gap-2 px-6 py-4 bg-primary-500 hover:bg-primary-600 text-white rounded-xl transition-colors font-semibold mt-4"
+                className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-blue-600 to-teal-600 hover:opacity-90 text-white rounded-xl transition-all font-semibold mt-4"
               >
-                Jetzt Anfrage
+                Anfrage stellen
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
