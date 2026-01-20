@@ -475,7 +475,7 @@ function App() {
                   <div className="text-gray-600 font-semibold">Erfolgreich abgeschlossene Projekte</div>
                 </div>
                 <div>
-                  <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600 mb-2">50.000m²+</div>
+                  <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600 mb-2">50.000m²</div>
                   <div className="text-gray-600 font-semibold">Verarbeitete Folienfläche</div>
                 </div>
                 <div>
