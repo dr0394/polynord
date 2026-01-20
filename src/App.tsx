@@ -676,7 +676,7 @@ function App() {
                     </svg>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-4xl font-bold text-gray-900">4,9</span>
+                        <span className="text-4xl font-bold text-gray-900">4,8</span>
                         <div className="flex gap-0.5">
                           {[1, 2, 3, 4, 5].map((star) => (
                             <svg key={star} className="w-5 h-5" viewBox="0 0 24 24" fill="#FBBC04">
