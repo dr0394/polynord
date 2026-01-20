@@ -405,28 +405,116 @@ function App() {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <AnimatedSection animation="fade-up">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-teal-600 text-white px-5 py-2.5 rounded-full text-sm font-bold mb-8">
+                <Building2 className="w-4 h-4" />
+                UNSERE PROJEKTE
+              </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                Auszug unserer <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600">Referenzen</span>
+                Referenzprojekte aus <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600">ganz Europa</span>
               </h2>
               <p className="text-xl text-gray-600 leading-relaxed">
-                Vertrauen von führenden Unternehmen und Institutionen
+                Vom Autohaus bis zur Industriehalle – unsere erfolgreich realisierten Projekte
               </p>
             </AnimatedSection>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto items-center">
-            {referenzLogos.map((logo, index) => (
-              <AnimatedSection key={index} animation="fade-up" delay={index * 40}>
-                <div className="bg-white border-2 border-gray-100 rounded-xl p-6 hover:border-blue-200 transition-all flex items-center justify-center h-28 grayscale hover:grayscale-0 group">
-                  <img
-                    src={logo.url}
-                    alt={`${logo.name} Referenz`}
-                    className="max-w-full max-h-full object-contain"
-                    loading="lazy"
-                  />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-16">
+            {[
+              { url: 'https://alkaio.com/media/1228279165912559.jpeg', title: 'VW Autohaus', category: 'Automotive' },
+              { url: 'https://alkaio.com/media/1587082136045539.jpeg', title: 'Industrie- / Lagerhalle', category: 'Industrie' },
+              { url: 'https://alkaio.com/media/1394104728848273.jpeg', title: 'Fensterfront mit LLumar', category: 'Büro' },
+              { url: 'https://alkaio.com/media/1846830656128555.jpeg', title: 'Campus Gebäude', category: 'Öffentlich' },
+              { url: 'https://alkaio.com/media/1925015791443233.jpeg', title: 'Terrassendach', category: 'Gewerbe' },
+              { url: 'https://alkaio.com/media/1403349324782222.jpeg', title: 'Urbanes Gewerbeobjekt', category: 'Gewerbe' },
+              { url: 'https://alkaio.com/media/1560861268536967.jpeg', title: 'Moderne Glasarchitektur', category: 'Büro' },
+              { url: 'https://alkaio.com/media/860747840031421.jpeg', title: 'Bürogebäude', category: 'Büro' },
+              { url: 'https://alkaio.com/media/1933211117541578.jpeg', title: 'Glasfassade mit Gerüst', category: 'Büro' },
+              { url: 'https://alkaio.com/media/908355421674614.jpeg', title: 'Moderne Glasfront', category: 'Büro' },
+              { url: 'https://alkaio.com/media/1869232053798432.jpeg', title: 'Industriegebäude', category: 'Industrie' },
+              { url: 'https://alkaio.com/media/869127469234947.jpeg', title: 'Industrie-Dach / Lichtkuppeln', category: 'Industrie' },
+              { url: 'https://alkaio.com/media/1235602535377540.jpeg', title: 'Industriehalle mit Hebebühne', category: 'Industrie' },
+              { url: 'https://alkaio.com/media/895670686756035.jpeg', title: 'Gewerbehalle', category: 'Industrie' },
+              { url: 'https://alkaio.com/media/2356545204768728.jpeg', title: 'Metallfassade', category: 'Industrie' },
+              { url: 'https://alkaio.com/media/865319476316837.jpeg', title: 'Bürogebäude UPS', category: 'Logistik' },
+              { url: 'https://alkaio.com/media/1937319596857521.jpeg', title: 'UPS Standort', category: 'Logistik' },
+              { url: 'https://alkaio.com/media/1444952087246856.jpeg', title: 'Modernes Funktionsgebäude', category: 'Gewerbe' },
+              { url: 'https://alkaio.com/media/1548496886438033.jpeg', title: 'Farbiges Gewerbegebäude', category: 'Gewerbe' },
+              { url: 'https://alkaio.com/media/1406398411266800.jpeg', title: 'Industriegebäude mit Bühne', category: 'Industrie' },
+              { url: 'https://alkaio.com/media/1586511159200470.jpeg', title: 'Öffentliches Gebäude', category: 'Öffentlich' },
+              { url: 'https://alkaio.com/media/961841432836401.jpeg', title: 'Industrie-Fensterfront', category: 'Industrie' },
+              { url: 'https://alkaio.com/media/1396747578718015.jpeg', title: 'Industriefassade Backstein', category: 'Industrie' }
+            ].map((projekt, index) => (
+              <AnimatedSection key={index} animation="fade-up" delay={index * 30}>
+                <div className="relative rounded-2xl overflow-hidden group cursor-pointer shadow-lg hover:shadow-2xl transition-all">
+                  <div className="aspect-[4/3]">
+                    <img
+                      src={projekt.url}
+                      alt={projekt.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <div className="inline-block px-3 py-1 bg-gradient-to-r from-blue-600 to-teal-600 text-white text-xs font-bold rounded-full mb-2">
+                        {projekt.category}
+                      </div>
+                      <h3 className="text-white font-bold text-lg">{projekt.title}</h3>
+                    </div>
+                  </div>
                 </div>
               </AnimatedSection>
             ))}
+          </div>
+
+          <AnimatedSection animation="fade-up">
+            <div className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-12 text-center max-w-4xl mx-auto border-2 border-blue-100">
+              <div className="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                  <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600 mb-2">500+</div>
+                  <div className="text-gray-600 font-semibold">Erfolgreich abgeschlossene Projekte</div>
+                </div>
+                <div>
+                  <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600 mb-2">50.000m²+</div>
+                  <div className="text-gray-600 font-semibold">Verarbeitete Folienfläche</div>
+                </div>
+                <div>
+                  <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600 mb-2">15+</div>
+                  <div className="text-gray-600 font-semibold">Jahre Erfahrung</div>
+                </div>
+              </div>
+              <p className="text-gray-700 font-semibold text-lg">
+                Von kleinen Gewerbeflächen bis zu großen Industriekomplexen – deutschland- und europaweit
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="mt-24">
+            <div className="max-w-4xl mx-auto text-center mb-12">
+              <AnimatedSection animation="fade-up">
+                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+                  Vertrauen von <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600">führenden Unternehmen</span>
+                </h3>
+                <p className="text-lg text-gray-600">
+                  Diese Unternehmen setzen auf unsere Expertise
+                </p>
+              </AnimatedSection>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto items-center">
+              {referenzLogos.map((logo, index) => (
+                <AnimatedSection key={index} animation="fade-up" delay={index * 40}>
+                  <div className="bg-white border-2 border-gray-100 rounded-xl p-6 hover:border-blue-200 transition-all flex items-center justify-center h-28 grayscale hover:grayscale-0 group">
+                    <img
+                      src={logo.url}
+                      alt={`${logo.name} Referenz`}
+                      className="max-w-full max-h-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
           </div>
         </div>
       </section>
