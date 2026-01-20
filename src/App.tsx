@@ -559,7 +559,7 @@ function App() {
                 </h2>
               </div>
               <div className="flex items-center justify-center gap-3 mb-4">
-                <span className="text-5xl md:text-6xl font-bold text-gray-900">4,9</span>
+                <span className="text-5xl md:text-6xl font-bold text-gray-900">4,8</span>
                 <div className="flex flex-col items-start">
                   <div className="flex gap-1">
                     {[1, 2, 3, 4, 5].map((star) => (
