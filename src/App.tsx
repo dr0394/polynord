@@ -9,7 +9,7 @@ import { Check, Sun, Shield, TrendingDown, Building2, Eye, Clock, MessageSquare,
 function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
-  const [legalModalType, setLegalModalType] = useState<'impressum' | 'datenschutz' | null>(null);
+  const [legalModalType, setLegalModalType] = useState<'impressum' | 'datenschutz' | 'agb' | null>(null);
 
   const montageBilder = [
     'https://alkaio.com/media/820926304331245.jpeg',
@@ -940,6 +940,12 @@ function App() {
                   className="block text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   Datenschutz
+                </button>
+                <button
+                  onClick={() => setLegalModalType('agb')}
+                  className="block text-gray-400 hover:text-blue-400 transition-colors"
+                >
+                  AGB
                 </button>
               </div>
             </div>

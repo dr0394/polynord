@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 interface LegalModalProps {
   isOpen: boolean;
   onClose: () => void;
-  type: 'impressum' | 'datenschutz';
+  type: 'impressum' | 'datenschutz' | 'agb';
 }
 
 export default function LegalModal({ isOpen, onClose, type }: LegalModalProps) {
@@ -19,7 +19,127 @@ export default function LegalModal({ isOpen, onClose, type }: LegalModalProps) {
           <X className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
-        {type === 'impressum' ? (
+        {type === 'agb' ? (
+          <div className="prose prose-sm sm:prose max-w-none">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">Allgemeine Geschäftsbedingungen (AGB)</h1>
+
+            <h2 className="text-xl font-bold text-gray-900 mt-6 mb-3">§ 1 Geltung der Bedingungen</h2>
+            <p className="text-gray-700 mb-4">
+              Die Lieferungen, Leistungen und Angebote von POLYNORD erfolgen ausschließlich aufgrund dieser Geschäftsbedingungen. Diese gelten somit auch für alle künftigen Geschäftsbeziehungen, auch wenn sie nicht nochmals ausdrücklich vereinbart werden. Abweichungen von diesen Geschäftsbedingungen bedürfen zu ihrer Gültigkeit der schriftlichen Vereinbarung zwischen POLYNORD und dem Besteller.
+            </p>
+
+            <h2 className="text-xl font-bold text-gray-900 mt-6 mb-3">§ 3 Preise, Preisänderungen</h2>
+            <p className="text-gray-700 mb-4">
+              Die Preise sind exklusive der jeweiligen gesetzlichen Umsatzsteuer.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Die Berechnung erfolgt nach tatsächlich verarbeiteten Flächen, wobei alle von einem Rechteckformat abweichenden Flächen (z. B. Dreiecke, Trapeze, Kreise sowie Rundungen aller Art) aufgrund des hohen Verschnitts als volle Fläche (Länge × Breite) berechnet werden.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Folien und Lacken wird bis 6 m² Fläche eine Pauschale lt. Preisliste zugrunde gelegt. Alle darüber hinausgehenden Mengen werden nach Aufmaß der tatsächlichen Beschichtung abgerechnet.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Bei der Beschichtung von Kleinscheiben unter 0,35 m² kann ein Kleinscheibenzuschlag bis zu 30 % berechnet werden.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Offensichtliche Aufmaßfehler im Angebot, insbesondere Additionsfehler, bleiben unberücksichtigt; die Abrechnung erfolgt nach den tatsächlichen Maßen und Mengen.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Bei stark verschmutzten Scheiben im Außen- und/oder Innenbereich kann ein Schmutzzuschlag je nach Aufwand berechnet werden.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Alle Scheibenflächen, die bei der Außendienstberatung nicht oder nur schwer zugänglich sind, so dass kein exaktes Aufmaß erfolgen kann, werden geschätzt und nach erfolgter Montage über das Aufmaß genau abgerechnet.
+            </p>
+
+            <h2 className="text-xl font-bold text-gray-900 mt-6 mb-3">§ 4 Auftragsdurchführung / Lieferzeiten</h2>
+            <p className="text-gray-700 mb-4">
+              POLYNORD bemüht sich, erteilte und bestätigte Aufträge schnellstmöglich zu erledigen, abhängig von Witterung und Einsatzplan. Terminwünsche werden soweit möglich berücksichtigt.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Wird ein vereinbarter Montage- bzw. Nachbesserungstermin vom Besteller nicht eingehalten, ist POLYNORD berechtigt, zusätzliche Kosten für vergebliche Fahrt- und Zeitaufwände in Rechnung zu stellen.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Kommt POLYNORD mit der Durchführung des Auftrags in Verzug, kann der Besteller nach schriftlicher Nachfristsetzung vom Vertrag zurücktreten, wenn POLYNORD nicht leistet.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Ist die Durchführung des Auftrags nicht oder nur mit unverhältnismäßig hohem Aufwand möglich, kann POLYNORD ganz oder teilweise vom Vertrag zurücktreten.
+            </p>
+
+            <h2 className="text-xl font-bold text-gray-900 mt-6 mb-3">§ 5 Mitwirkung des Bestellers</h2>
+            <p className="text-gray-700 mb-4">
+              Der Besteller ist zur Mitwirkung bei der Durchführung des Auftrags verpflichtet.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Am Montagetag müssen alle Arbeitsflächen freigeräumt sein; POLYNORD-Monteure dürfen Kundeneigentum nicht wegzuräumen.
+            </p>
+            <p className="text-gray-700 mb-4">
+              POLYNORD ist berechtigt, Wartezeiten gesondert in Rechnung zu stellen.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Der Besteller hat die Montage nach Fertigstellung zu überprüfen und abzunehmen.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Bei Folienmontagen können Feuchtigkeitseinschlüsse (Blasen) auftreten; diese sind kein Mangel, sofern sie innerhalb von 3 Monaten verschwinden.
+            </p>
+
+            <h2 className="text-xl font-bold text-gray-900 mt-6 mb-3">§ 6 Gewährleistung</h2>
+            <p className="text-gray-700 mb-4">
+              Bei Mängeln liefert POLYNORD nach seiner Wahl Ersatz oder bessert nach, unter Ausschluss sonstiger Gewährleistungsansprüche.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Kleine Farbabweichungen oder Staubeinschlüsse sind unvermeidlich und kein Mangel.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Die Gewährleistungsfrist beträgt 6 Monate und beginnt mit dem Tag der Montage (längere Fristen können im jeweiligen Angebot stehen).
+            </p>
+            <p className="text-gray-700 mb-4">
+              Offensichtliche Mängel müssen unverzüglich und spätest innerhalb von 2 Wochen schriftlich gemeldet werden.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Beschädigungen des Eigentums des Bestellers müssen unmittelbar gemeldet werden.
+            </p>
+
+            <h2 className="text-xl font-bold text-gray-900 mt-6 mb-3">§ 7 Haftungsbegrenzung</h2>
+            <p className="text-gray-700 mb-4">
+              Schadensersatzansprüche aus Vertragsverletzungen oder unerlaubter Handlung sind ausgeschlossen, soweit sie nicht grob fahrlässig oder vorsätzlich verursacht wurden.
+            </p>
+            <p className="text-gray-700 mb-4">
+              POLYNORD haftet nicht für Schäden durch falsche Behandlung im Gebrauch des Materials (z. B. falsche Reinigung).
+            </p>
+
+            <h2 className="text-xl font-bold text-gray-900 mt-6 mb-3">§ 8 Eigentumsvorbehalt</h2>
+            <p className="text-gray-700 mb-4">
+              POLYNORD behält sich das Eigentum an den gelieferten Waren bis zur vollständigen Zahlung aller Forderungen vor.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Bei Zugriffen Dritter auf Vorbehaltsware hat der Besteller auf das Eigentum von POLYNORD hinzuweisen.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Bei vertragswidrigem Verhalten (z. B. Zahlungsverzug) kann POLYNORD Vorbehaltsware zurücknehmen.
+            </p>
+
+            <h2 className="text-xl font-bold text-gray-900 mt-6 mb-3">§ 9 Zahlungsbedingungen</h2>
+            <p className="text-gray-700 mb-4">
+              Rechnungen von POLYNORD sind sofort nach Erhalt ohne Abzug fällig.
+            </p>
+            <p className="text-gray-700 mb-4">
+              POLYNORD kann Zahlungen zunächst auf ältere Schulden anrechnen; der Besteller darf nur mit unbestrittenen oder rechtskräftig festgestellten Forderungen aufrechnen.
+            </p>
+
+            <h2 className="text-xl font-bold text-gray-900 mt-6 mb-3">§ 10 Erfüllung und Gerichtsstand</h2>
+            <p className="text-gray-700 mb-4">
+              Für alle Ansprüche gilt der Sitz von POLYNORD als Gerichtsstand (Amtsgericht Schwarzenbek bzw. Landgericht Lübeck).
+            </p>
+            <p className="text-gray-700 mb-4">
+              In sonstigen Fällen ist Gerichtsstand der Sitz des Bestellers.
+            </p>
+
+            <h2 className="text-xl font-bold text-gray-900 mt-6 mb-3">§ 11 Salvatorische Klausel</h2>
+            <p className="text-gray-700 mb-4">
+              Sollten einzelne Bestimmungen dieser AGB nicht rechtswirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.
+            </p>
+          </div>
+        ) : type === 'impressum' ? (
           <div className="prose prose-sm sm:prose max-w-none">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">Impressum</h1>
 
