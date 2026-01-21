@@ -55,12 +55,9 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
       ? `\n\nAngehängte Dateien (${formData.files.length}): ${formData.files.map(f => f.name).join(', ')}`
       : '';
 
-    const whatsappMessage = `Neue B2B-Anfrage über sonnenschutzfolien-montage.de\n\nArt: ${formData.anfrageart}\nObjekt: ${formData.objekttyp}\nFläche: ${formData.quadratmeter || 'nicht angegeben'} m²\nFirma: ${formData.firma}\nName: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.telefon}\n\nNachricht: ${formData.nachricht}${filesInfo}`;
-
     const emailSubject = 'Neue B2B-Anfrage: Sonnenschutzfolien Gewerbe/Industrie';
     const emailBody = `Neue B2B-Anfrage über sonnenschutzfolien-montage.de\n\nArt der Anfrage: ${formData.anfrageart}\nObjekttyp: ${formData.objekttyp}\nFläche: ${formData.quadratmeter || 'nicht angegeben'} m²\n\nKontaktdaten:\nFirma: ${formData.firma}\nName: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.telefon}\n\nNachricht:\n${formData.nachricht}${filesInfo}`;
 
-    window.open(`https://wa.me/491234567890?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
     window.location.href = `mailto:info@polynord.de?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 
     onClose();
