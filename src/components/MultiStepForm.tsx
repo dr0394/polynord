@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, ChevronRight, ChevronLeft } from 'lucide-react';
+import { X, ChevronRight, ChevronLeft, Upload, FileText, Image as ImageIcon } from 'lucide-react';
 
 interface MultiStepFormProps {
   isOpen: boolean;
@@ -11,6 +11,8 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
   const [formData, setFormData] = useState({
     anfrageart: '',
     objekttyp: '',
+    quadratmeter: '',
+    files: [] as File[],
     firma: '',
     name: '',
     email: '',
@@ -21,20 +23,42 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
   if (!isOpen) return null;
 
   const handleNext = () => {
-    if (step < 4) setStep(step + 1);
+    if (step < 5) setStep(step + 1);
   };
 
   const handleBack = () => {
     if (step > 1) setStep(step - 1);
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    setFormData({ ...formData, files: [...formData.files, ...files] });
+  };
+
+  const removeFile = (index: number) => {
+    const newFiles = formData.files.filter((_, i) => i !== index);
+    setFormData({ ...formData, files: newFiles });
+  };
+
+  const formatFileSize = (bytes: number) => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const whatsappMessage = `Neue B2B-Anfrage über sonnenschutzfolien-montage.de\n\nArt: ${formData.anfrageart}\nObjekt: ${formData.objekttyp}\nFirma: ${formData.firma}\nName: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.telefon}\n\nNachricht: ${formData.nachricht}`;
+    const filesInfo = formData.files.length > 0
+      ? `\n\nAngehängte Dateien (${formData.files.length}): ${formData.files.map(f => f.name).join(', ')}`
+      : '';
+
+    const whatsappMessage = `Neue B2B-Anfrage über sonnenschutzfolien-montage.de\n\nArt: ${formData.anfrageart}\nObjekt: ${formData.objekttyp}\nFläche: ${formData.quadratmeter || 'nicht angegeben'} m²\nFirma: ${formData.firma}\nName: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.telefon}\n\nNachricht: ${formData.nachricht}${filesInfo}`;
 
     const emailSubject = 'Neue B2B-Anfrage: Sonnenschutzfolien Gewerbe/Industrie';
-    const emailBody = `Neue B2B-Anfrage über sonnenschutzfolien-montage.de\n\nArt der Anfrage: ${formData.anfrageart}\nObjekttyp: ${formData.objekttyp}\n\nKontaktdaten:\nFirma: ${formData.firma}\nName: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.telefon}\n\nNachricht:\n${formData.nachricht}`;
+    const emailBody = `Neue B2B-Anfrage über sonnenschutzfolien-montage.de\n\nArt der Anfrage: ${formData.anfrageart}\nObjekttyp: ${formData.objekttyp}\nFläche: ${formData.quadratmeter || 'nicht angegeben'} m²\n\nKontaktdaten:\nFirma: ${formData.firma}\nName: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.telefon}\n\nNachricht:\n${formData.nachricht}${filesInfo}`;
 
     window.open(`https://wa.me/491234567890?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
     window.location.href = `mailto:info@polynord.de?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
@@ -44,6 +68,8 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
     setFormData({
       anfrageart: '',
       objekttyp: '',
+      quadratmeter: '',
+      files: [],
       firma: '',
       name: '',
       email: '',
@@ -65,10 +91,10 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
         <div className="mb-6 sm:mb-8">
           <div className="flex items-center justify-between mb-3 pr-8">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Jetzt Anfrage senden</h2>
-            <span className="text-xs sm:text-sm text-gray-500 whitespace-nowrap">Schritt {step} von 4</span>
+            <span className="text-xs sm:text-sm text-gray-500 whitespace-nowrap">Schritt {step} von 5</span>
           </div>
           <div className="flex gap-2">
-            {[1, 2, 3, 4].map((i) => (
+            {[1, 2, 3, 4, 5].map((i) => (
               <div
                 key={i}
                 className={`h-1 flex-1 rounded-full transition-colors ${
@@ -120,6 +146,71 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
 
           {step === 3 && (
             <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Projektdetails</h3>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Fläche in m² (optional)</label>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={formData.quadratmeter}
+                  onChange={(e) => setFormData({ ...formData, quadratmeter: e.target.value })}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="z.B. 150"
+                />
+                <p className="text-xs text-gray-500 mt-1">Ungefähre Fläche für die Folienverlegung</p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Bilder oder Dokumente hochladen (optional)</label>
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition-colors">
+                  <input
+                    type="file"
+                    multiple
+                    accept="image/*,.pdf,.doc,.docx"
+                    onChange={handleFileChange}
+                    className="hidden"
+                    id="file-upload"
+                  />
+                  <label htmlFor="file-upload" className="cursor-pointer">
+                    <Upload className="w-10 h-10 mx-auto text-gray-400 mb-2" />
+                    <p className="text-sm text-gray-600 mb-1">Klicken Sie hier, um Dateien hochzuladen</p>
+                    <p className="text-xs text-gray-500">Bilder, PDFs oder Word-Dokumente (max. 10MB pro Datei)</p>
+                  </label>
+                </div>
+
+                {formData.files.length > 0 && (
+                  <div className="mt-4 space-y-2">
+                    {formData.files.map((file, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
+                        <div className="flex items-center gap-3 flex-1 min-w-0">
+                          {file.type.startsWith('image/') ? (
+                            <ImageIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                          ) : (
+                            <FileText className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-gray-900 truncate">{file.name}</p>
+                            <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => removeFile(index)}
+                          className="ml-2 text-red-500 hover:text-red-700 flex-shrink-0"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {step === 4 && (
+            <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Ihre Kontaktdaten</h3>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Firma / Unternehmen *</label>
@@ -168,7 +259,7 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
             </div>
           )}
 
-          {step === 4 && (
+          {step === 5 && (
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Noch etwas, das wir wissen sollten?</h3>
               <div>
@@ -185,6 +276,8 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
                   <strong>Zusammenfassung:</strong><br />
                   Art: {formData.anfrageart}<br />
                   Objekt: {formData.objekttyp}<br />
+                  {formData.quadratmeter && `Fläche: ${formData.quadratmeter} m²`}<br />
+                  {formData.files.length > 0 && `Dateien: ${formData.files.length} hochgeladen`}<br />
                   Firma: {formData.firma}<br />
                   Kontakt: {formData.name}, {formData.email}
                 </p>
@@ -203,13 +296,14 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
                 Zurück
               </button>
             )}
-            {step < 4 ? (
+            {step < 5 ? (
               <button
                 type="button"
                 onClick={handleNext}
                 disabled={
                   (step === 1 && !formData.anfrageart) ||
-                  (step === 2 && !formData.objekttyp)
+                  (step === 2 && !formData.objekttyp) ||
+                  (step === 4 && (!formData.firma || !formData.name || !formData.email || !formData.telefon))
                 }
                 className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg hover:opacity-90 transition-all disabled:bg-gray-300 disabled:cursor-not-allowed"
               >
