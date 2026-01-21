@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Navigation from './components/Navigation';
 import MultiStepForm from './components/MultiStepForm';
 import CookieBanner from './components/CookieBanner';
-import WhatsAppButton from './components/WhatsAppButton';
 import AnimatedSection from './components/AnimatedSection';
 import { Check, Sun, Shield, TrendingDown, Building2, Eye, Clock, MessageSquare, MapPin, Phone, Mail, ArrowRight, Award, Target, Factory, Hotel, ShoppingBag, Car, ChevronDown, Play, Cross } from 'lucide-react';
 
@@ -68,7 +67,6 @@ function App() {
       <Navigation onOpenForm={() => setIsFormOpen(true)} />
       <MultiStepForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
       <CookieBanner />
-      <WhatsAppButton />
 
       <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <div className="absolute inset-0 opacity-20">
