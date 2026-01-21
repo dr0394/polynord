@@ -2,12 +2,14 @@ import { useState } from 'react';
 import Navigation from './components/Navigation';
 import MultiStepForm from './components/MultiStepForm';
 import CookieBanner from './components/CookieBanner';
+import LegalModal from './components/LegalModal';
 import AnimatedSection from './components/AnimatedSection';
 import { Check, Sun, Shield, TrendingDown, Building2, Eye, Clock, MessageSquare, MapPin, Phone, Mail, ArrowRight, Award, Target, Factory, Hotel, ShoppingBag, Car, ChevronDown, Play, Cross } from 'lucide-react';
 
 function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const [legalModalType, setLegalModalType] = useState<'impressum' | 'datenschutz' | null>(null);
 
   const montageBilder = [
     'https://alkaio.com/media/820926304331245.jpeg',
@@ -66,6 +68,11 @@ function App() {
     <div className="min-h-screen bg-white overflow-hidden">
       <Navigation onOpenForm={() => setIsFormOpen(true)} />
       <MultiStepForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
+      <LegalModal
+        isOpen={legalModalType !== null}
+        onClose={() => setLegalModalType(null)}
+        type={legalModalType || 'impressum'}
+      />
       <CookieBanner />
 
       <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
@@ -797,8 +804,8 @@ function App() {
 
                 <div className="space-y-6 mb-8">
                   {[
-                    { icon: Phone, label: 'Telefon', value: '+49 123 456 7890' },
-                    { icon: Mail, label: 'E-Mail', value: 'info@polynord.de' },
+                    { icon: Phone, label: 'Telefon', value: '04151-8320350' },
+                    { icon: Mail, label: 'E-Mail', value: 'anfrage@polynord.de' },
                     { icon: MapPin, label: 'Standort', value: 'Deutschland & Europa' }
                   ].map((item, index) => (
                     <div key={index} className="flex items-start gap-4">
@@ -922,8 +929,18 @@ function App() {
             <div>
               <h3 className="font-bold mb-6 text-lg">Rechtliches</h3>
               <div className="space-y-3">
-                <a href="#" className="block text-gray-400 hover:text-blue-400 transition-colors">Impressum</a>
-                <a href="#" className="block text-gray-400 hover:text-blue-400 transition-colors">Datenschutz</a>
+                <button
+                  onClick={() => setLegalModalType('impressum')}
+                  className="block text-gray-400 hover:text-blue-400 transition-colors"
+                >
+                  Impressum
+                </button>
+                <button
+                  onClick={() => setLegalModalType('datenschutz')}
+                  className="block text-gray-400 hover:text-blue-400 transition-colors"
+                >
+                  Datenschutz
+                </button>
               </div>
             </div>
           </div>

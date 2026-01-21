@@ -35,7 +35,7 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
     const emailSubject = 'Neue B2B-Anfrage: Sonnenschutzfolien Gewerbe/Industrie';
     const emailBody = `Neue B2B-Anfrage über sonnenschutzfolien-montage.de\n\nArt der Anfrage: ${formData.anfrageart}\nObjekttyp: ${formData.objekttyp}\nFläche: ${formData.quadratmeter || 'nicht angegeben'} m²\n\nKontaktdaten:\nFirma: ${formData.firma}\nName: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.telefon}\n\nNachricht:\n${formData.nachricht}`;
 
-    window.location.href = `mailto:info@polynord.de?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    window.location.href = `mailto:anfrage@polynord.de?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 
     onClose();
     setStep(1);
