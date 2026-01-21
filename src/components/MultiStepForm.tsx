@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, ChevronRight, ChevronLeft, Upload, FileText, Image as ImageIcon } from 'lucide-react';
+import { X, ChevronRight, ChevronLeft } from 'lucide-react';
 
 interface MultiStepFormProps {
   isOpen: boolean;
@@ -12,7 +12,6 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
     anfrageart: '',
     objekttyp: '',
     quadratmeter: '',
-    files: [] as File[],
     firma: '',
     name: '',
     email: '',
@@ -30,33 +29,11 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
     if (step > 1) setStep(step - 1);
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    setFormData({ ...formData, files: [...formData.files, ...files] });
-  };
-
-  const removeFile = (index: number) => {
-    const newFiles = formData.files.filter((_, i) => i !== index);
-    setFormData({ ...formData, files: newFiles });
-  };
-
-  const formatFileSize = (bytes: number) => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const filesInfo = formData.files.length > 0
-      ? `\n\nAngehängte Dateien (${formData.files.length}): ${formData.files.map(f => f.name).join(', ')}`
-      : '';
-
     const emailSubject = 'Neue B2B-Anfrage: Sonnenschutzfolien Gewerbe/Industrie';
-    const emailBody = `Neue B2B-Anfrage über sonnenschutzfolien-montage.de\n\nArt der Anfrage: ${formData.anfrageart}\nObjekttyp: ${formData.objekttyp}\nFläche: ${formData.quadratmeter || 'nicht angegeben'} m²\n\nKontaktdaten:\nFirma: ${formData.firma}\nName: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.telefon}\n\nNachricht:\n${formData.nachricht}${filesInfo}`;
+    const emailBody = `Neue B2B-Anfrage über sonnenschutzfolien-montage.de\n\nArt der Anfrage: ${formData.anfrageart}\nObjekttyp: ${formData.objekttyp}\nFläche: ${formData.quadratmeter || 'nicht angegeben'} m²\n\nKontaktdaten:\nFirma: ${formData.firma}\nName: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.telefon}\n\nNachricht:\n${formData.nachricht}`;
 
     window.location.href = `mailto:info@polynord.de?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 
@@ -66,7 +43,6 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
       anfrageart: '',
       objekttyp: '',
       quadratmeter: '',
-      files: [],
       firma: '',
       name: '',
       email: '',
@@ -157,52 +133,6 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
                 />
                 <p className="text-xs text-gray-500 mt-1">Ungefähre Fläche für die Folienverlegung</p>
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Bilder oder Dokumente hochladen (optional)</label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition-colors">
-                  <input
-                    type="file"
-                    multiple
-                    accept="image/*,.pdf,.doc,.docx"
-                    onChange={handleFileChange}
-                    className="hidden"
-                    id="file-upload"
-                  />
-                  <label htmlFor="file-upload" className="cursor-pointer">
-                    <Upload className="w-10 h-10 mx-auto text-gray-400 mb-2" />
-                    <p className="text-sm text-gray-600 mb-1">Klicken Sie hier, um Dateien hochzuladen</p>
-                    <p className="text-xs text-gray-500">Bilder, PDFs oder Word-Dokumente (max. 10MB pro Datei)</p>
-                  </label>
-                </div>
-
-                {formData.files.length > 0 && (
-                  <div className="mt-4 space-y-2">
-                    {formData.files.map((file, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div className="flex items-center gap-3 flex-1 min-w-0">
-                          {file.type.startsWith('image/') ? (
-                            <ImageIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                          ) : (
-                            <FileText className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                          )}
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-gray-900 truncate">{file.name}</p>
-                            <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
-                          </div>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => removeFile(index)}
-                          className="ml-2 text-red-500 hover:text-red-700 flex-shrink-0"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
             </div>
           )}
 
@@ -274,7 +204,6 @@ export default function MultiStepForm({ isOpen, onClose }: MultiStepFormProps) {
                   Art: {formData.anfrageart}<br />
                   Objekt: {formData.objekttyp}<br />
                   {formData.quadratmeter && `Fläche: ${formData.quadratmeter} m²`}<br />
-                  {formData.files.length > 0 && `Dateien: ${formData.files.length} hochgeladen`}<br />
                   Firma: {formData.firma}<br />
                   Kontakt: {formData.name}, {formData.email}
                 </p>
